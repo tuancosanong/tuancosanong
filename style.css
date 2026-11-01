@@ -56,13 +56,13 @@ h1{font-size:1.75rem;line-height:1.2;color:var(--leaf-d);font-weight:800}
 .app{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff;flex:none}
 .app svg{width:24px;height:24px;fill:currentColor}
 .a-phone{background:#00cc00}.a-zalo{background:#0068ff}.a-fb{background:#1877f2}
-.a-msg{background:linear-gradient(135deg,#00b2ff,#a334fa 60%,#ff5ca1)}.a-yt{background:#f03}
+.a-msg{background:linear-gradient(135deg,#00b2ff,#a334fa 60%,#ff5ca1)}.a-yt{background:#f03}.a-tt{background:#010101}
 .t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
 .t b{font-size:.95rem;font-weight:800}
 .t small{font-size:.8rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .act{font-size:.78rem;font-weight:800;padding:5px 11px;border-radius:999px;white-space:nowrap}
 .c-green{background:#dcf7d4;color:#0a6a0a}.c-blue{background:#e1ecff;color:#0a4fc4}
-.c-violet{background:#efe3ff;color:#6a2bbd}.c-red{background:#ffe1e4;color:#b3122a}
+.c-violet{background:#efe3ff;color:#6a2bbd}.c-red{background:#ffe1e4;color:#b3122a}.c-dark{background:#e8e8e8;color:#111}
 .cv{width:15px;height:15px;color:var(--moss);flex:none;fill:none;stroke:currentColor}
 
 /* Nút */

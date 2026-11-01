@@ -95,7 +95,7 @@
   doc.getElementById("vcard-btn").addEventListener("click", function () {
     var vcf = ["BEGIN:VCARD", "VERSION:3.0", "FN:Huỳnh Minh Tuấn", "N:Huỳnh;Minh Tuấn;;;",
       "ORG:Mật Ong Rừng Nguyên Chất", "TEL;TYPE=CELL:+84915462127",
-      "URL:" + pageUrl, "URL:https://www.facebook.com/tuan.ta.768991", "URL:https://www.youtube.com/@tuancosanong",
+      "URL:" + pageUrl, "URL:https://www.facebook.com/tuan.ta.768991", "URL:https://www.youtube.com/@tuancosanong", "URL:https://www.tiktok.com/@tuanta239",
       "END:VCARD"].join("\r\n");
     var url = URL.createObjectURL(new Blob([vcf], { type: "text/vcard;charset=utf-8" }));
     var a = doc.createElement("a");
