@@ -97,6 +97,87 @@ h1{font-size:1.75rem;line-height:1.2;color:var(--leaf-d);font-weight:800}
 .video-facade .play svg{width:100%;height:100%;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
 .video-facade:hover .play{transform:translate(-50%,-50%) scale(1.1)}
 
+/* Phản hồi khách hàng */
+.feedback-card{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:12px;border-top:5px solid var(--honey)}
+.fb-slider{position:relative}
+.feedback-grid{
+  list-style:none;display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);
+  grid-auto-columns:calc((100% - 20px)/3);gap:10px;
+  overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-behavior:smooth;
+  padding-bottom:8px;scrollbar-width:thin;scrollbar-color:var(--moss) var(--mint);
+}
+.feedback-grid>li{scroll-snap-align:start;min-width:0}
+@media (min-width:600px){.feedback-grid{grid-auto-columns:calc((100% - 30px)/4)}}
+.feedback-grid::-webkit-scrollbar{height:6px}
+.feedback-grid::-webkit-scrollbar-thumb{background:var(--moss);border-radius:6px}
+.feedback-grid::-webkit-scrollbar-track{background:var(--mint);border-radius:6px}
+.fb-nav{
+  position:absolute;top:calc(50% - 4px);transform:translateY(-50%);z-index:2;width:40px;height:40px;padding:0 0 3px;border-radius:50%;
+  color:#fff;font-size:1.7rem;font-weight:700;line-height:1;display:grid;place-items:center;
+  border:2px solid #fff;transition:transform .18s,box-shadow .18s,filter .18s;
+}
+.fb-nav-prev{background:linear-gradient(145deg,#f8d374,#e9a820);color:#5a3d00;box-shadow:0 4px 12px rgba(233,168,32,.5)}
+.fb-nav-next{background:linear-gradient(145deg,#3cbf3c,#0a5a0a);box-shadow:0 4px 12px rgba(10,90,10,.45)}
+.fb-nav:hover{transform:translateY(-50%) scale(1.08);filter:brightness(1.06)}
+.fb-nav:active{transform:translateY(-50%) scale(.95)}
+.fb-nav[hidden]{display:none}
+.fb-nav-prev{left:-8px}.fb-nav-next{right:-8px}
+@media (hover:none){.fb-nav{display:none}}
+.fb-item{display:block;width:100%;aspect-ratio:3/4;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);background:var(--honey-bg);transition:border-color .15s,transform .15s}
+.fb-item:hover{border-color:var(--moss);transform:translateY(-2px)}
+.fb-item img{width:100%;height:100%;object-fit:cover;object-position:top}
+.lightbox{
+  border:2px solid var(--honey-l);padding:0;margin:auto;overflow:hidden;
+  width:min(70vw,760px);height:96vh;height:96dvh;max-width:none;max-height:none;border-radius:var(--r-lg);
+  background:linear-gradient(160deg,#10281a,#0a1a10);
+  box-shadow:0 0 0 5px rgba(248,211,116,.18),0 24px 70px rgba(0,0,0,.55);
+}
+@media (max-width:600px){.lightbox{width:94vw;height:94vh;height:94dvh}.lb-inner{padding:50px 44px 12px!important}}
+.lightbox::backdrop{background:rgba(8,20,10,.72);backdrop-filter:blur(3px)}
+.lb-inner{position:relative;width:100%;height:100%;display:grid;place-items:center;padding:54px 54px 14px}
+.lb-inner img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.lb-btn{
+  position:absolute;width:40px;height:40px;padding:0 0 3px;border-radius:50%;color:#fff;font-size:1.6rem;font-weight:700;line-height:1;
+  display:grid;place-items:center;border:2px solid rgba(255,255,255,.85);transition:transform .18s,filter .18s;
+}
+.lb-btn:hover{filter:brightness(1.1)}
+.lb-close{top:10px;right:10px;padding:0 0 2px;font-size:1.5rem;background:linear-gradient(145deg,#ff6b6b,#c0182f);box-shadow:0 4px 12px rgba(192,24,47,.45)}
+.lb-prev{left:8px;top:50%;transform:translateY(-50%);background:linear-gradient(145deg,#f8d374,#e9a820);color:#5a3d00;box-shadow:0 4px 12px rgba(233,168,32,.45)}
+.lb-next{right:8px;top:50%;transform:translateY(-50%);background:linear-gradient(145deg,#3cbf3c,#0a5a0a);box-shadow:0 4px 12px rgba(10,90,10,.5)}
+.lb-prev:hover,.lb-next:hover{transform:translateY(-50%) scale(1.08)}
+.lb-close:hover{transform:scale(1.08)}
+.lb-count{position:absolute;top:14px;left:50%;transform:translateX(-50%);padding:5px 14px;border-radius:999px;background:rgba(248,211,116,.16);border:1px solid var(--honey-l);color:var(--honey-l);font-weight:700;font-size:.85rem;letter-spacing:.04em}
+
+/* Chuyển khoản */
+.bank-card{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:18px;padding:20px 18px;
+  border-radius:var(--r-lg);border:1px solid var(--honey-l);border-top:5px solid var(--honey);
+  background:linear-gradient(160deg,#fffdf3,var(--honey-bg) 55%,var(--mint));
+  box-shadow:0 6px 18px rgba(233,168,32,.18);overflow:hidden;
+}
+.bank-card::before,.bank-card::after{
+  content:"";position:absolute;width:120px;height:120px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(248,211,116,.55),transparent 70%);
+}
+.bank-card::before{top:-40px;right:-40px}
+.bank-card::after{bottom:-50px;left:-40px;background:radial-gradient(circle,rgba(0,204,0,.18),transparent 70%)}
+.bank-qr{
+  position:relative;z-index:1;padding:10px;background:#fff;border-radius:var(--r-md);
+  border:3px solid var(--leaf);box-shadow:0 0 0 5px var(--honey-bg),0 8px 20px rgba(10,90,10,.2);
+}
+.bank-qr img{width:min(240px,64vw);height:auto;border-radius:6px}
+.bank-info{position:relative;z-index:1;width:100%;display:flex;flex-direction:column;gap:12px;text-align:center}
+.bank-field{display:flex;flex-direction:column;gap:2px;padding:10px 12px;background:rgba(255,255,255,.8);border:1px dashed var(--honey);border-radius:var(--r-md)}
+.bank-field small{font-size:.8rem;color:var(--muted)}
+.bank-field b{font-size:1.1rem;font-weight:800;color:var(--leaf-d);word-break:break-word}
+.bank-num{font-size:1.5rem!important;letter-spacing:.08em}
+.bank-sub{font-size:.8rem;color:var(--muted)}
+.bank-note{font-size:.8rem;color:var(--muted)}
+@media (min-width:600px){
+  .bank-card{flex-direction:row;justify-content:center;gap:28px;padding:24px}
+  .bank-info{max-width:300px;text-align:left}
+}
+
 /* Bản đồ */
 .map-card{background:var(--white);border:1px solid var(--line);border-radius:var(--r-lg);padding:12px;display:flex;flex-direction:column;gap:12px}
 .map-frame{aspect-ratio:4/3;border-radius:var(--r-md);overflow:hidden;background:var(--mint)}

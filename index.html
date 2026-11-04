@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=17">
+  <link rel="stylesheet" href="style.css?v=21">
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -27,6 +27,7 @@
     <symbol id="i-user" viewBox="0 0 24 24"><g fill="currentColor"><circle cx="10" cy="8" r="3.6"/><path d="M3.5 19c0-3.300 2.900-5.500 6.500-5.500s6.500 2.200 6.500 5.500z"/></g><path d="M18.500 8v5M16 10.500h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
     <symbol id="i-chev" viewBox="0 0 24 24"><path d="m9 5.500 6.500 6.500L9 18.500" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-leaf" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14zM5 19c2-4 5-7 9-9"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 9h10v11H9zM5 15V4h10"/></symbol>
   </svg>
 
   <main class="page">
@@ -72,6 +73,42 @@
       </div>
     </section>
 
+    <section class="section" id="feedback-section" aria-labelledby="feedback-title" hidden>
+      <h2 id="feedback-title">Phản hồi từ khách hàng</h2>
+      <div class="feedback-card" id="feedback-card">
+        <!-- Ảnh tự hiển thị: chỉ cần bỏ 1.jpg, 2.jpg ... 50.jpg vào thư mục assets/phan-hoi/ -->
+        <div class="fb-slider">
+          <button class="fb-nav fb-nav-prev" type="button" id="fb-prev" aria-label="Xem ảnh trước" hidden>‹</button>
+          <ul class="feedback-grid" id="feedback-grid" tabindex="0" aria-label="Danh sách ảnh phản hồi, vuốt ngang để xem thêm"></ul>
+          <button class="fb-nav fb-nav-next" type="button" id="fb-next" aria-label="Xem ảnh sau" hidden>›</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="bank-title">
+      <h2 id="bank-title">Thông tin chuyển khoản</h2>
+      <div class="bank-card">
+        <div class="bank-qr"><img src="assets/qr-bank.png" alt="Mã QR chuyển khoản của Huỳnh Minh Tuấn" width="240" height="240" loading="lazy" decoding="async"></div>
+        <div class="bank-info">
+          <div class="bank-field">
+            <small>Ngân hàng</small>
+            <b>Vietcombank</b>
+            <span class="bank-sub">Ngân hàng TMCP Ngoại thương Việt Nam</span>
+          </div>
+          <div class="bank-field">
+            <small>Chủ tài khoản</small>
+            <b>HUYNH MINH TUAN</b>
+          </div>
+          <div class="bank-field">
+            <small>Số tài khoản</small>
+            <b class="bank-num" id="bank-num">1339402127</b>
+          </div>
+          <button class="pill dark" type="button" id="copy-bank"><svg class="ico"><use href="#i-copy"/></svg><span>Sao chép số tài khoản</span></button>
+          <p class="bank-note">Quét mã QR bằng ứng dụng ngân hàng để chuyển khoản nhanh.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section" aria-labelledby="map-title">
       <h2 id="map-title">Nhà tôi</h2>
       <div class="map-card">
@@ -113,8 +150,17 @@
       <p class="dialog-hint">Nếu ứng dụng không mở, bạn có thể sao chép số và gọi thủ công.</p>
     </div>
   </dialog>
+  <dialog id="photo-dialog" class="lightbox" aria-label="Xem ảnh phản hồi">
+    <div class="lb-inner">
+      <img id="lb-img" src="" alt="">
+      <button class="lb-btn lb-close" type="button" id="lb-close" aria-label="Đóng">×</button>
+      <button class="lb-btn lb-prev" type="button" id="lb-prev" aria-label="Ảnh trước">‹</button>
+      <button class="lb-btn lb-next" type="button" id="lb-next" aria-label="Ảnh sau">›</button>
+      <span class="lb-count" id="lb-count"></span>
+    </div>
+  </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
-  <script src="script.js?v=10" defer></script>
+  <script src="script.js?v=13" defer></script>
 </body>
 </html>

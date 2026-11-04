@@ -72,6 +72,110 @@
     if (event.target === dialog) dialog.close();
   });
 
+  // ---------- Album phản hồi khách hàng ----------
+  // Chỉ cần bỏ ảnh 1.jpg, 2.jpg ... 50.jpg vào thư mục assets/phan-hoi/ là tự hiển thị.
+  var FB_DIR = "assets/phan-hoi/";
+  var FB_MAX = 50;
+  var fbSection = doc.getElementById("feedback-section");
+  var fbGrid = doc.getElementById("feedback-grid");
+  var fbPrev = doc.getElementById("fb-prev");
+  var fbNext = doc.getElementById("fb-next");
+  var lb = doc.getElementById("photo-dialog");
+  var lbImg = doc.getElementById("lb-img");
+  var lbCount = doc.getElementById("lb-count");
+  var fbImgs = [];
+  var fbIndex = 0;
+
+  function showPhoto(i) {
+    fbIndex = (i + fbImgs.length) % fbImgs.length;
+    lbImg.src = fbImgs[fbIndex].src;
+    lbImg.alt = fbImgs[fbIndex].alt;
+    lbCount.textContent = (fbIndex + 1) + " / " + fbImgs.length;
+  }
+
+  function updateNav() {
+    var max = fbGrid.scrollWidth - fbGrid.clientWidth - 2;
+    fbPrev.hidden = fbGrid.scrollLeft <= 2;
+    fbNext.hidden = fbGrid.scrollLeft >= max;
+  }
+
+  function buildFeedback(found) {
+    if (!found.length) return;
+    found.forEach(function (n, i) {
+      var li = doc.createElement("li");
+      var btn = doc.createElement("button");
+      btn.type = "button";
+      btn.className = "fb-item";
+      btn.setAttribute("aria-label", "Xem phản hồi số " + (i + 1));
+      var img = doc.createElement("img");
+      img.src = FB_DIR + n + ".jpg";
+      img.alt = "Ảnh phản hồi của khách hàng số " + (i + 1);
+      img.loading = "lazy";
+      img.decoding = "async";
+      btn.appendChild(img);
+      li.appendChild(btn);
+      fbGrid.appendChild(li);
+      fbImgs.push(img);
+      btn.addEventListener("click", function () {
+        showPhoto(i);
+        if (typeof lb.showModal === "function") lb.showModal();
+      });
+    });
+    fbSection.hidden = false;
+    updateNav();
+  }
+
+  (function probeFeedback() {
+    var ok = new Array(FB_MAX + 1);
+    var pending = FB_MAX;
+    for (var n = 1; n <= FB_MAX; n++) {
+      (function (n) {
+        var probe = new Image();
+        probe.onload = function () { ok[n] = true; done(); };
+        probe.onerror = function () { ok[n] = false; done(); };
+        probe.src = FB_DIR + n + ".jpg";
+      })(n);
+    }
+    function done() {
+      if (--pending) return;
+      var found = [];
+      for (var k = 1; k <= FB_MAX; k++) if (ok[k]) found.push(k);
+      buildFeedback(found);
+    }
+  })();
+
+  fbGrid.addEventListener("scroll", updateNav, { passive: true });
+  window.addEventListener("resize", updateNav);
+  fbPrev.addEventListener("click", function () { fbGrid.scrollBy({ left: -fbGrid.clientWidth * 0.8 }); });
+  fbNext.addEventListener("click", function () { fbGrid.scrollBy({ left: fbGrid.clientWidth * 0.8 }); });
+
+  doc.getElementById("lb-prev").addEventListener("click", function () { showPhoto(fbIndex - 1); });
+  doc.getElementById("lb-next").addEventListener("click", function () { showPhoto(fbIndex + 1); });
+  doc.getElementById("lb-close").addEventListener("click", function () { lb.close(); });
+  lb.addEventListener("click", function (e) { if (e.target === lb || e.target.classList.contains("lb-inner")) lb.close(); });
+  lb.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") showPhoto(fbIndex - 1);
+    if (e.key === "ArrowRight") showPhoto(fbIndex + 1);
+  });
+  var touchX = null;
+  lb.addEventListener("touchstart", function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener("touchend", function (e) {
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) showPhoto(fbIndex + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
+
+  // ---------- Sao chép số tài khoản ----------
+  var bankBtn = doc.getElementById("copy-bank");
+  if (bankBtn) {
+    bankBtn.addEventListener("click", function () {
+      var num = doc.getElementById("bank-num").textContent.trim();
+      copyText(num).then(function () { notify("Đã sao chép số tài khoản: " + num); })
+        .catch(function () { notify("Không thể tự sao chép. Hãy nhấn giữ số để sao chép."); });
+    });
+  }
+
   // ---------- QR Code + chia sẻ danh thiếp ----------
   var pageUrl = "https://tuancosanong.vercel.app";
   var qrBox = doc.getElementById("qrcode");
